@@ -2,9 +2,23 @@
 name = "clap-doc"
 version = "0.1.0"
 edition = "2021"
+description = "Create markdown descriptions for `clap::Command`s"
+categories = [
+    "rust-patterns",
+    "development-tools",
+    "command-line-interface",
+    "text-processing",
+]
+keywords = ["clap", "markdown"]
+license = "Apache-2.0 OR MIT"
+documentation = "https://docs.rs/clap-doc/"
+homepage = "https://crates.io/crates/clap-doc/"
+repository = "https://github.com/aatifsyed/clap-doc/"
 
 [dependencies]
-clap_builder = { version = "4.5.17", default-features = false, features = ["std"] }
+clap_builder = { version = "4.5.17", default-features = false, features = [
+    "std",
+] }
 stackstack = "0.3.0"
 
 [dev-dependencies]
