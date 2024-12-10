@@ -2,7 +2,7 @@
 
 use core::fmt::{self, Write as _};
 
-use clap_builder::Command;
+use clap_builder::{Command, CommandFactory};
 use stackstack::Stack;
 
 /// Create a markdown description for the given [`Command`].
@@ -12,6 +12,13 @@ pub fn markdown(cmd: Command) -> String {
     let mut buf = String::new();
     _markdown(&mut buf, Stack::new(), &cmd).expect("fmt::write returned an error");
     buf
+}
+
+/// Create a markdown description for the given [`CommandFactory`].
+///
+/// This is shorthand for [`markdown`].
+pub fn markdown_for<T: CommandFactory>() -> String {
+    markdown(T::command())
 }
 
 fn _markdown(buf: &mut String, path: Stack<&str>, cmd: &Command) -> fmt::Result {
@@ -60,7 +67,7 @@ fn join<T: fmt::Display>(it: impl IntoIterator<Item = T>) -> Result<String, fmt:
 mod tests {
     include!("test-snippet.rs");
 
-    use clap::{CommandFactory, Parser};
+    use clap::Parser;
     use expect_test::{expect, expect_file};
     use indoc::formatdoc;
 
